@@ -14,23 +14,19 @@ class ScrappingFactory
      * Get a scrap strategy by host.
      *
      * @param string $host
-     *
      * @return ScrapStrategyInterface
      *
      * @throws ProductScrapException
      */
-    public static function getScrapStrategy(string $host): ScrapStrategyInterface
+    public static function getScrapStrategy(string $domain): ScrapStrategyInterface
     {
-        $regex = '/.+\/\/|www.|\..+/';
-        $domain = preg_replace($regex, '', $host);
-
         switch ($domain) {
             case "ebay":
                 return new EbayScrapStrategy();
             case "amazon":
                 return new AmazonScrapStrategy();
             default:
-                throw new ScrapException("Unknown scrap strategy");
+                throw new ScrapException("Unsupported scrap");
         }
     }
 }

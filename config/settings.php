@@ -13,12 +13,12 @@ return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
         SettingsInterface::class => function () {
             return new Settings([
-                'displayErrorDetails' => false, // Should be set to false in production
+                'displayErrorDetails' => true, // Should be set to false in production
                 'logError'            => true,
                 'logErrorDetails'     => true,
                 'logger' => [
                     'name' => 'app',
-                    'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
+                    'path' => __DIR__ . '/../logs/app.log',
                     'level' => Logger::DEBUG,
                 ],
             ]);

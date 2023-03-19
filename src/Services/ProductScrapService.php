@@ -17,7 +17,9 @@ class ProductScrapService
             throw new ScrapException('The [link] param is not valid');
         }
 
-        $scrappingStrategy = ScrappingFactory::getScrapStrategy($hostLinkProduct);
+        $regex = '/.+\/\/|www.|\..+/';
+        $domain = preg_replace($regex, '', $hostLinkProduct);
+        $scrappingStrategy = ScrappingFactory::getScrapStrategy($domain);
 
         return $scrappingStrategy->getProductData($link);
     }
