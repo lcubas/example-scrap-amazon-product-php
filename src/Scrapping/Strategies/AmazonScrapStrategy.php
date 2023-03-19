@@ -61,7 +61,7 @@ class AmazonScrapStrategy implements ScrapStrategyInterface
             'image' => $crawler->filterXPath(self::XPATH_PRODUCT_IMAGE)->text(''),
             'price' => $crawler->filterXPath(self::XPATH_PRODUCT_PRICE)->text(''),
             // 'overview_features' => $this->getOverviewFetures($crawler),
-            'variations' => $this->getVariations($crawler),
+            // 'variations' => $this->getVariations($crawler),
         ];
     }
 
