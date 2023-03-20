@@ -1,18 +1,9 @@
 version: '3.7'
 
-volumes:
-  logs:
-    driver: local
-
 services:
   app:
-    image: php:8.1-fpm
-    working_dir: /var/www
-    command: php -S 0.0.0.0:8080 -t public
-    environment:
-      docker: "true"
+    build: .
     ports:
-      - "8080:8080"
+     - "8080:80"
     volumes:
-      - .:/var/www
-      - logs:/var/www/logs
+     - ./:/var/www/html/
