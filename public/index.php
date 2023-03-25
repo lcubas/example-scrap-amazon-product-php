@@ -9,6 +9,7 @@ use Slim\Factory\ServerRequestCreatorFactory;
 use App\Handlers\HttpErrorHandler;
 use App\Settings\SettingsInterface;
 use App\Response\ResponseEmitter\ApiResponseEmitter;
+use Psr\Log\LoggerInterface;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -51,6 +52,9 @@ $routes($app);
 /** @var SettingsInterface $settings */
 $settings = $container->get(SettingsInterface::class);
 
+/** @var LoggerInterface $logger */
+$logger = $container->get(LoggerInterface::class);
+
 $displayErrorDetails = $settings->get('displayErrorDetails');
 $logError = $settings->get('logError');
 $logErrorDetails = $settings->get('logErrorDetails');
@@ -68,7 +72,7 @@ $shutdownHandler = new ShutdownHandler($request, $errorHandler, $displayErrorDet
 register_shutdown_function($shutdownHandler);
 
 // Add error middleware
-$errorMiddleware = $app->addErrorMiddleware($displayErrorDetails, $logError, $logErrorDetails);
+$errorMiddleware = $app->addErrorMiddleware($displayErrorDetails, $logError, $logErrorDetails, $logger);
 $errorMiddleware->setDefaultErrorHandler($errorHandler);
 
 // Run app & emit response

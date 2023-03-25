@@ -9,7 +9,13 @@ use App\Scrapping\ScrappingFactory;
 
 class ProductScrapService
 {
-    public function scrap($link)
+    /**
+     * Scrap by providing link
+     *
+     * @param string $link
+     * @return mixed
+     */
+    public function scrap(string $link)
     {
         $hostLinkProduct = parse_url($link, PHP_URL_HOST);
 

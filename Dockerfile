@@ -10,6 +10,7 @@ COPY ./ /var/www/html/
 COPY ./composer.json /var/www/
 COPY ./docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 
+RUN service apache2 restart
 RUN usermod -u 1000 www-data
 RUN chown -R www-data:www-data /var/www/
 
