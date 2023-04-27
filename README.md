@@ -1,4 +1,4 @@
-# Unaluka scrap products API
+# Example scrap products API
 
 ## Install the Application
 
